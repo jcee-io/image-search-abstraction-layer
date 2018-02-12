@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('mongoose');
 const GoogleImages = require('google-images');
+const db = require('./database.js');
+
 if(process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/:query', async (req,res) => {
 	const page = req.query.offset || 1;
 	const images = await client.search(req.params.query, { page });
+
+	db.addQuery(req.params.query);
 
 	res.json(images.map(image => {
 		let { url, description, thumbnail, parentPage } = image;
