@@ -18,6 +18,11 @@ app.get('/', async (req, res) => {
 
 	res.json(searches.map(({ query, when }) => ({ query, when })));
 });
+
+app.get('/favicon.ico', (req,res) => {
+  res.end();
+});
+
 app.get('/:query', async (req,res) => {
 	const page = req.query.offset || 1;
 	const images = await client.search(req.params.query, { page });
