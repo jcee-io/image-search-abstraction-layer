@@ -13,7 +13,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', async (req, res) => {
+	const searches = await db.recentSearches();
 
+	res.json(searches);
+});
 app.get('/:query', async (req,res) => {
 	const page = req.query.offset || 1;
 	const images = await client.search(req.params.query, { page });
