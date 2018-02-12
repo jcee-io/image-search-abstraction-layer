@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', async (req, res) => {
 	const searches = await db.recentSearches();
 
-	res.json(searches);
+	res.json(searches.map(({ query, when }) => ({ query, when })));
 });
 app.get('/:query', async (req,res) => {
 	const page = req.query.offset || 1;
