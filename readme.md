@@ -13,3 +13,9 @@ This API program utilizes an image search engine that also shows the 10 most rec
 4) Node/Express/Body-Parser
 5) Bluebird 
 6) dotenv for development
+
+## Usage (with live link)
+
+'/': Will show history of requests made
+'/:query': This is the actual endpoint that will search Google for image links
+
